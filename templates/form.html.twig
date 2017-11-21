@@ -1,0 +1,92 @@
+{#
+# Copyright 2015 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#}
+
+{# [START book_form] #}
+{% extends "base.html.twig" %}
+
+{% block content %}
+<script type="text/javascript">
+    function OnInput (event) {
+        var textdata = event.target.value;
+        var phpurl = '/?searchtext=' + textdata;
+        getRequest(
+            phpurl,
+            drawOutput,
+            drawError
+        );
+    }
+    function drawError() {
+        var container = document.getElementById('output');
+        container.innerHTML = 'Oops, there was an error';
+    }
+    function drawOutput(responseText) {
+        var container = document.getElementById('output');
+        container.innerHTML = responseText;
+    }
+    function getRequest(url, success, error) {
+        var req = false;
+        try{
+            // most browsers
+            req = new XMLHttpRequest();
+        } catch (e){
+            // IE
+            try{
+                req = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch(e) {
+                // try an older version
+                try{
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch(e) {
+                    return false;
+                }
+            }
+        }
+        if (!req) return false;
+        if (typeof success != 'function') success = function () {};
+        if (typeof error!= 'function') error = function () {};
+        req.onreadystatechange = function(){
+            if(req.readyState == 4) {
+                return req.status === 200 ?
+                    success(req.responseText) : error(req.status);
+            }
+        }
+        req.open("GET", url, true);
+        req.send(null);
+        return req;
+    }
+    // Internet Explorer
+    //function OnPropChanged (event) {
+    //	if (event.propertyName.toLowerCase () == "value") {
+    //		alert ("The new content: " + event.srcElement.value);
+    //	}
+    //}
+</script>
+<h3>Product Search</h3>
+
+<form method="POST" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <input type="text" oninput="OnInput(event);" onpropertychange="OnPropChanged(event);" autofocus><br/>
+    <br/>
+    <div id="output" style="border: 1px solid black">Watch out for AJAX output here</div>
+  </div>
+
+  {# [END book_form_image] #}
+
+</form>
+
+{% endblock %}
+{# [END book_form] #}
