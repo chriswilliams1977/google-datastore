@@ -14,25 +14,42 @@
 # limitations under the License.
 #}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Bookshelf - PHP on Google Cloud Platform</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  </head>
-  <body>
-    <div class="navbar navbar-default">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <li><a href="/products">Home</a></li>
-        </ul>
-      </div>
-    </div>
+<html class="no-js" lang="en">
+    <head>
+        <title>Bookshelf - PHP on Google Cloud Platform</title>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <div class="container">
-      {% block content %}{% endblock %}
-    </div>
-    {{user}}
-  </body>
+        <!--[if IE ]>
+        <script>
+            document.createElement('header');
+            document.createElement('main');
+            document.createElement('footer');
+            document.createElement('nav');
+        </script>
+        <![endif]-->
+        {# TODO: Chris, this should work too. But not sure how.
+            <link rel="stylesheet" href="{{ asset('bundles/src/stylesheets/bookshelf.css') }}" />
+            <script src="{{ asset('bundles/src/javascript/bookshelf.js') }}" defer></script>
+        #}
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/bookshelf.css" />
+    </head>
+    <body>
+        <header class="navigation">
+            <ul class="navigation__list">
+                <li><a href="/products" class="navigation__link">Home</a></li>
+            </ul>
+        </header>
+        </div>
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+        {{user}}
+
+        <script src="/javascript/bookshelf.js" defer></script>
+    </body>
 </html>
