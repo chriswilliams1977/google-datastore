@@ -97,6 +97,8 @@ svg {
             outline: 0;
             padding: 6px 10px;
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .search-bar__button {
@@ -109,7 +111,27 @@ svg {
             position: absolute;
             right: 0;
             top: 10px;
+            z-index: 3;
         }
+
+    .search-results {
+        display: none;
+        background-color: #f3f3f3;
+        border: 1px solid #8CBEB2;
+        border-top: none;
+        padding: 10px 20px;
+        color: #5C4B51;
+        width: calc(100% - 58px);
+        position: relative;
+        top: -4px;
+        left: -1px;
+        z-index: 1;
+        border-radius: 0 0 6px 6px;
+    }
+
+    .search-results--has-results {
+        display: block;
+    }
 
 .main-content {
     background-color: white;

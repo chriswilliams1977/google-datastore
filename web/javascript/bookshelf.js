@@ -1,5 +1,8 @@
 var Bookshelf = (function () {
     // Privates
+    const formNode = document.querySelector('#search-form');
+    const inputNode = document.querySelector('#search-phrase');
+    const resultsNode = document.querySelector('#search-results');
 
     // Returns a function, that, as long as it continues to be invoked, will not
     // be triggered. The function will be called after it stops being called for
@@ -22,7 +25,12 @@ var Bookshelf = (function () {
 
     // Only search when user stops typing
     var _onKeydown = _debounce(function(event) {
+        if (!event) return;
+        if (inputNode.value == '') return;
+        _getBooksFromServer(event);
+    }, 500);
 
+    var _getBooksFromServer = function(event) {
         var textdata = event.target.value;
         // ?searchtext=
         var phpurl = '/products/' + textdata;
@@ -31,16 +39,23 @@ var Bookshelf = (function () {
             _drawOutput,
             _drawError
         );
-    }, 500);
+    };
 
     var _drawError = function() {
-        var container = document.getElementById('output');
-        container.innerHTML = 'Oops, there was an error';
+        resultsNode.innerHTML = 'Oops, there was an error';
+        _showResults();
     };
 
     var _drawOutput = function(responseText) {
-        var container = document.getElementById('output');
-        container.innerHTML = responseText;
+        if (responseText == ''){
+            responseText = 'No books found';
+        }
+        resultsNode.innerHTML = responseText;
+        _showResults();
+    };
+
+    var _showResults = function() {
+        resultsNode.classList.toggle('search-results--has-results');
     };
 
     var _getRequest = function(url, success, error) {
@@ -81,8 +96,6 @@ var Bookshelf = (function () {
     };
 
     var _redirectMe = function() {
-        const formNode = document.querySelector('#search-form');
-        const inputNode = document.querySelector('#search-phrase');
         formNode.submit();
         console.log('Redirect to:', "/products/" + inputNode.value);
         // window.location.replace("/products/" + inputNode.value);
@@ -90,8 +103,6 @@ var Bookshelf = (function () {
 
     var publicMethods = {
         init: function() {
-            const formNode = document.querySelector('#search-form');
-            const inputNode = document.querySelector('#search-phrase');
             formNode.addEventListener('submit', _onSubmit);
             inputNode.addEventListener('keydown', _onKeydown);
         }
