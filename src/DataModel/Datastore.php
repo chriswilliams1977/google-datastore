@@ -108,7 +108,7 @@ class Datastore implements DataModelInterface
                 ->limit($limit);
             $result = $this->datastore->runQuery($query);
             foreach ($result as $SKU) {
-                $matches_string = $matches_string . $SKU['name'] . "<br/>";
+                $matches_string = $matches_string . $SKU['name'];
             }
             return $matches_string;
         }
