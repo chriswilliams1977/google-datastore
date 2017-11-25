@@ -1,6 +1,28 @@
 var Bookshelf = (function () {
     // Privates
-    var _onInput = function(event) {
+
+    // Returns a function, that, as long as it continues to be invoked, will not
+    // be triggered. The function will be called after it stops being called for
+    // N milliseconds. If `immediate` is passed, trigger the function on the
+    // leading edge, instead of the trailing.
+    var _debounce = function(func, wait, immediate) {
+    	var timeout;
+    	return function() {
+    		var context = this, args = arguments;
+    		var later = function() {
+    			timeout = null;
+    			if (!immediate) func.apply(context, args);
+    		};
+    		var callNow = immediate && !timeout;
+    		clearTimeout(timeout);
+    		timeout = setTimeout(later, wait);
+    		if (callNow) func.apply(context, args);
+    	};
+    };
+
+    // Only search when user stops typing
+    var _onKeydown = _debounce(function(event) {
+
         var textdata = event.target.value;
         // ?searchtext=
         var phpurl = '/products/' + textdata;
@@ -9,7 +31,7 @@ var Bookshelf = (function () {
             _drawOutput,
             _drawError
         );
-    };
+    }, 500);
 
     var _drawError = function() {
         var container = document.getElementById('output');
@@ -71,7 +93,7 @@ var Bookshelf = (function () {
             const formNode = document.querySelector('#search-form');
             const inputNode = document.querySelector('#search-phrase');
             formNode.addEventListener('submit', _onSubmit);
-            inputNode.addEventListener('input', _onInput);
+            inputNode.addEventListener('keydown', _onKeydown);
         }
     }
 
