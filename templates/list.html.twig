@@ -17,11 +17,18 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <form id="search-form" onsubmit="return redirectMe();" method="POST" enctype="multipart/form-data" name="myform" class="search-bar">
+    <form id="search-form" method="POST" enctype="multipart/form-data" name="myform" class="search-bar">
         <label for="search-phrase" class="search-bar__label">I am looking for:</label>
         <div class="search-bar__field">
-            <input type="text" oninput="OnInput(event);" onpropertychange="OnPropChanged(event);" id="search-phrase" class="search-bar__input" autofocus>
-            <button type="submit" class="search-bar__button">Search</button>
+            <input type="text" id="search-phrase" class="search-bar__input" placeholder="What are you looking for?" autofocus>
+            <button type="submit" class="search-bar__button">
+                {# Magnifier icon #}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                    <path d="M21.8 11.1c0 2.2-.5 4-1.5 5.6-.4.6-.3.9.2 1.3 2.7 2.6 5.3 5.3 8 8 .7.7.8 1.1.1 1.9-.2.3-.5.6-.8.8-.5.4-1 .4-1.5-.1-2.7-2.7-5.4-5.4-8.1-8.2-.4-.4-.7-.5-1.2-.2-7 4.2-15.6-.6-15.8-8.7C.8 6.4 5 1.7 10 1.1c5.5-.7 10.5 3 11.6 8.2.1.7.2 1.4.2 1.8zm-17.3.3c0 3.8 3.1 7 6.9 7 3.8 0 7-3.2 7-7s-3.2-6.9-7-6.9c-3.8-.1-6.9 3-6.9 6.9z"/>
+                </svg>
+                {# Magnifier icon #}
+                <span class="hide-accessible">Search</span>
+            </button>
         </div>
 
         <div id="output"></div>
