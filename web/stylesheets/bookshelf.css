@@ -15,8 +15,8 @@ h1, h2, h3, h4, h5, h6, label {
 
 svg {
     width: 30px;
-    stroke: #fff;
-    fill: #fff;
+    stroke: #085eb9;
+    fill: #085eb9;
 }
 
 .hide-accessible {
@@ -37,16 +37,14 @@ svg {
     margin: 0 auto;
 }
 /*
-    Light grey: #f3f3f3
-    Brown: #5C4B51
-    Blue: #8CBEB2
-    Yellow: #F2EBBF
-    Orange: #F3B562
-    Red: #F06060
+    Dark: #003b64
+    Lighter: #002e4e
+    Light: #085eb9
+    Yellow: #fff200
 
 */
     .navigation {
-        background: #F2EBBF;
+        background: #003b64;
         padding: 10px 20px;
     }
         .navigation__list {
@@ -55,7 +53,7 @@ svg {
             padding: 0;
         }
             .navigation__link {
-                color: #5C4B51;
+                color: #fff;
                 text-decoration: none;
                 font-family: 'Open Sans', sans-serif;
             }
@@ -68,7 +66,7 @@ svg {
 
 
 .search-bar {
-    background: #8CBEB2;
+    background: #002e4e;
     padding: 15px 20px 20px 20px;
     color: #fff;
     text-align: left;
@@ -77,17 +75,18 @@ svg {
     .search-bar__field {
         position: relative;
         padding: 10px 0;
-    }
 
+    }
         .search-bar__label {
             padding: 10px 10px 10px 0;
             font-size: 1.2rem;
         }
 
         .search-bar__input {
+            background-color: #fffffb;
             border-radius: 6px;
-            border: 0;
-            color: #5C4B51;
+            border: none;
+            color: #003b64;
             display: block;
             font-family: arial,sans-serif;
             font-size: 1.1rem;
@@ -97,11 +96,13 @@ svg {
             outline: 0;
             padding: 6px 10px;
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .search-bar__button {
-            background-color: #F3B562;
             border: none;
+            border-left: 1px solid rgba(0, 59, 100, 0.44);
             border-radius: 0 6px 6px 0;
             cursor: pointer;
             padding: 5px 15px;
@@ -109,7 +110,27 @@ svg {
             position: absolute;
             right: 0;
             top: 10px;
+            z-index: 3;
         }
+
+    .search-results {
+        display: none;
+        background-color: #fff;
+        border: 1px solid #000;
+        border-top: none;
+        padding: 10px 20px;
+        color: #5C4B51;
+        width: calc(100% - 58px);
+        position: relative;
+        top: -4px;
+        left: -1px;
+        z-index: 1;
+        border-radius: 0 0 6px 6px;
+    }
+
+    .search-results--has-results {
+        display: block;
+    }
 
 .main-content {
     background-color: white;

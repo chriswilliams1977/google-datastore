@@ -30,13 +30,12 @@
                 {# Magnifier icon #}
                 <span class="hide-accessible">Search</span>
             </button>
+            <div id="search-results" class="search-results"></div>
         </div>
     </div>
-    <div id="output"></div>
 </form>
 
     {# [START book_list] #}
-    {% if books|length > 0 %}
         {% for book in books %}
             <div class="media">
                 <a href="/products/{{book.id}}">
@@ -50,7 +49,6 @@
                 </a>
             </div>
         {% endfor %}
-    {% endif %}
     {# [END book_list] #}
 
     {% if next_page_token %}
