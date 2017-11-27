@@ -55,7 +55,7 @@ class Datastore implements DataModelInterface
         $nextPageCursor = null;
         foreach ($results as $entity) {
             $book = $entity->get();
-            $book['id'] = $entity->key()->pathEndIdentifier();
+            $book['name'] = $entity->key()->pathEndIdentifier();
             $books[] = $book;
             $nextPageCursor = $entity->cursor();
         }
@@ -82,7 +82,7 @@ class Datastore implements DataModelInterface
             $nextPageCursor = null;
             foreach ($results as $entity) {
                 $book = $entity->get();
-                $book['id'] = $entity->key()->pathEndIdentifier();
+                $book['name'] = $entity->key()->pathEndIdentifier();
                 $books[] = $book;
                 $nextPageCursor = $entity->cursor();
             }
@@ -95,7 +95,9 @@ class Datastore implements DataModelInterface
 
     public function queryBooks($queryval, $limit = 20, $cursor = null)
     {
-        $matches_string = "";
+        /**$matches_string = "";*/
+        $products = array();
+
         try
         {
             //cache miss, let us go to datastore and fetch the result...
@@ -108,9 +110,10 @@ class Datastore implements DataModelInterface
                 ->limit($limit);
             $result = $this->datastore->runQuery($query);
             foreach ($result as $SKU) {
-                $matches_string = $matches_string . $SKU['name'] . "<br/>";
+                /**$matches_string = $matches_string . $SKU['name'] . "<br/>";*/
+                $products[] = $SKU['name'];
             }
-            return $matches_string;
+            return $products;
         }
         catch (Exception $e) {
         	echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -137,7 +140,7 @@ class Datastore implements DataModelInterface
 
         if ($entity) {
             $book = $entity->get();
-            $book['id'] = $id;
+            $book['name'] = $id;
             return $book;
         }
 
@@ -148,7 +151,7 @@ class Datastore implements DataModelInterface
     {
         $this->verifyBook($book);
 
-        if (!isset($book['id'])) {
+        if (!isset($book['name'])) {
             throw new \InvalidArgumentException('Book must have an "id" attribute');
         }
 

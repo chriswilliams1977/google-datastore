@@ -23,6 +23,7 @@ namespace Google\Cloud\Samples\Bookshelf;
  */
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Google\Cloud\Samples\Bookshelf\DataModel\DataModelInterface;
 use Google\Cloud\Samples\Bookshelf\FileSystem\CloudStorage;
 
@@ -41,8 +42,8 @@ $app->get('/products/', function (Request $request) use ($app) {
 // [START query]
 $app->get('/products/{searchtext}', function ($searchtext) use ($app) {
 
-    echo 'Matches:<br/>';
-    $result = "";
+
+    $result = array();
 
     //Get the string typed in by user for autocompletion...
     $queryval = strtolower($searchtext);
@@ -57,7 +58,7 @@ $app->get('/products/{searchtext}', function ($searchtext) use ($app) {
         $upperlimit = $queryval . json_decode('"\ufffd"');
         $result = $model->queryBooks($queryval);
     }
-    return $result;
+    return new JsonResponse($result);
 
 });
 // [END query]

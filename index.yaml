@@ -1,0 +1,6 @@
+indexes:
+
+- kind: SKU
+  properties:
+  - name: name
+    direction: desc
