@@ -42,7 +42,6 @@ $app->get('/products/', function (Request $request) use ($app) {
 // [START query]
 $app->get('/products/{searchtext}', function ($searchtext) use ($app) {
 
-
     $result = array();
 
     //Get the string typed in by user for autocompletion...
@@ -95,11 +94,3 @@ $app->post('/products/{searchtext}', function ($searchtext) use ($app) {
    ));
 });
 // [END show]
-
-
-
-
-
-
-
-

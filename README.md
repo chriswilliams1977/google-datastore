@@ -7,3 +7,14 @@ and deploying this sample.
 [step-3]: https://cloud.google.com/php/getting-started/using-cloud-storage
 
 # google-datastore
+
+# How to run
+To run the webserver:
+```
+    php -S localhost:8000 -t web
+```
+
+And you can access the app via:
+```
+    http://localhost:8000
+```
