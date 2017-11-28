@@ -96,9 +96,7 @@ var Bookshelf = (function () {
     };
 
     var _redirectMe = function() {
-        formNode.submit();
-        console.log('Redirect to:', "/products/" + inputNode.value);
-        // window.location.replace("/products/" + inputNode.value);
+        window.location.replace("/products/" + inputNode.value);
     };
 
     var publicMethods = {
