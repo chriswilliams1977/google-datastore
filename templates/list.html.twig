@@ -17,11 +17,11 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-<form id="search-form" method="POST" enctype="multipart/form-data" name="myform" class="search-bar">
+<form id="search-form" method="POST" action="/products" enctype="multipart/form-data" name="myform" class="search-bar">
     <div class="container">
         <label for="search-phrase" class="search-bar__label hide-accessible">I am looking for:</label>
         <div class="search-bar__field">
-            <input type="text" id="search-phrase" class="search-bar__input" placeholder="What are you looking for?" autofocus>
+            <input type="text" id="search-phrase" name="searchtext" class="search-bar__input" placeholder="What are you looking for?" autofocus>
             <button type="submit" class="search-bar__button">
                 {# Magnifier icon #}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
