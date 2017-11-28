@@ -5,7 +5,7 @@ var Bookshelf = (function () {
     const resultsNode = document.querySelector('#search-results');
 
     // Only search when user stops typing
-    var _onKeydown = function(event) {
+    var _onInput = function(event) {
         if (!event) return;
         if (inputNode.value == '') return;
         _getBooksFromServer(event);
@@ -83,7 +83,7 @@ var Bookshelf = (function () {
     var publicMethods = {
         init: function() {
             formNode.addEventListener('submit', _onSubmit);
-            inputNode.addEventListener('keydown', _onKeydown);
+            inputNode.addEventListener('input', _onInput);
         }
     }
 
