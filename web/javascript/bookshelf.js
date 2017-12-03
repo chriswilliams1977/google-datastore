@@ -28,7 +28,7 @@ var Bookshelf = (function () {
     };
 
     var _drawOutput = function(responseText) {
-        if (responseText == ''){
+        if (responseText == '[]'){
             responseText = 'No books found';
         }
         resultsNode.innerHTML = responseText;
@@ -36,7 +36,7 @@ var Bookshelf = (function () {
     };
 
     var _showResults = function() {
-        resultsNode.classList.toggle('search-results--has-results');
+        resultsNode.classList.add('search-results--has-results');
     };
 
     var _getRequest = function(url, success, error) {
