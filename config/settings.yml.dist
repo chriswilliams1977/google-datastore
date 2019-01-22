@@ -1,6 +1,6 @@
 # Google credentials and configuration
-google_client_id:      866986508517-e4rf4n3fog013igbsp68vjvnqofksn3b.apps.googleusercontent.com
-google_client_secret:  OBCLIVJyq1IMoBQZSQ3wab9U
+google_client_id:      
+google_client_secret:  
 google_project_id:     
 
 # options are "mysql", "postgres", "mongodb", or "datastore"
